@@ -2,7 +2,7 @@
   "name": "karso-qr",
   "version": "1.0.0",
   "scripts": {
-    "build": "webpack --mode production",
+    "build": "webpack --config config/webpack.config.js --mode production",
     "build:dev": "webpack --mode development",
     "build:start": "cd dist && PORT=8080 npx serve",
     "start": "webpack  serve --open --config config/webpack.config.js --mode development",
