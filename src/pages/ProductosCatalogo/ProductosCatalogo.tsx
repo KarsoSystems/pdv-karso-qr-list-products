@@ -1,5 +1,6 @@
 import { AppBar, Box, Container, Toolbar, Typography } from "@mui/material";
 import React from "react";
+// import IMG from "../../img/lista_1.png";
 
 const ProductosCatalogo = () => {
   return (
@@ -8,7 +9,7 @@ const ProductosCatalogo = () => {
         <Container maxWidth="xl">
           <Toolbar disableGutters>
             <img
-              src="/static/logo.png"
+              src="https://raw.githubusercontent.com/KarsoSystems/pdv-karso-qr-list-products/main/public/static/logo.png"
               width="150px"
               style={{
                 padding: "10px",
@@ -41,14 +42,14 @@ const ProductosCatalogo = () => {
       </AppBar>
       <Container maxWidth="lg">
         <img
-          src="/static/lista_1.png"
+          src="https://raw.githubusercontent.com/KarsoSystems/pdv-karso-qr-list-products/main/public/static/lista_1.png"
           style={{
             width: "100%",
             margin: "10px 0px",
           }}
         />
         <img
-          src="/static/lista_2.png"
+          src="https://raw.githubusercontent.com/KarsoSystems/pdv-karso-qr-list-products/main/public/static/lista_2.png"
           style={{
             width: "100%",
             margin: "10px 0px",
