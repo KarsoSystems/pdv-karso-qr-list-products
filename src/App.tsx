@@ -1,9 +1,8 @@
 import React from "react";
-import ReactDOM from "react-dom/client";
-import "./index.css";
 import { theme } from "./styles/Tema";
 import { CssBaseline, ThemeProvider } from "@mui/material";
 import ProductosCatalogo from "./pages/ProductosCatalogo/ProductosCatalogo";
+import "./index.css";
 
 const App = () => {
   return (
@@ -16,9 +15,5 @@ const App = () => {
     </div>
   );
 };
-const rootElement = document.getElementById("app");
-if (!rootElement) throw new Error("Failed to find the root element");
 
-const root = ReactDOM.createRoot(rootElement);
-
-root.render(<App />);
+export default App;

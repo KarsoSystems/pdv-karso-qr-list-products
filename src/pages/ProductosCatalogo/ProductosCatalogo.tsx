@@ -1,6 +1,8 @@
 import { AppBar, Box, Container, Toolbar, Typography } from "@mui/material";
 import React from "react";
-// import IMG from "../../img/lista_1.png";
+import IMG from "../../assets/lista_1.png";
+import IMGDOS from "../../assets/lista_2.png";
+import LOGO from "../../assets/logo.png";
 
 const ProductosCatalogo = () => {
   return (
@@ -9,7 +11,7 @@ const ProductosCatalogo = () => {
         <Container maxWidth="xl">
           <Toolbar disableGutters>
             <img
-              src="https://raw.githubusercontent.com/KarsoSystems/pdv-karso-qr-list-products/main/public/static/logo.png"
+              src={LOGO}
               width="150px"
               style={{
                 padding: "10px",
@@ -42,14 +44,14 @@ const ProductosCatalogo = () => {
       </AppBar>
       <Container maxWidth="lg">
         <img
-          src="https://raw.githubusercontent.com/KarsoSystems/pdv-karso-qr-list-products/main/public/static/lista_1.png"
+          src={IMG}
           style={{
             width: "100%",
             margin: "10px 0px",
           }}
         />
         <img
-          src="https://raw.githubusercontent.com/KarsoSystems/pdv-karso-qr-list-products/main/public/static/lista_2.png"
+          src={IMGDOS}
           style={{
             width: "100%",
             margin: "10px 0px",

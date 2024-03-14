@@ -3,10 +3,13 @@ const ModuleFederationPlugin = require("webpack/lib/container/ModuleFederationPl
 const Dotenv = require('dotenv-webpack');
 const deps = require("../package.json").dependencies;
 var path = require("path");
+// const CopyPlugin = require("copy-webpack-plugin");
+
 module.exports = (_, argv) => ({
   output: {
     publicPath: "https://karsosystems.github.io/pdv-karso-qr-list-products/",
-    //publicPath: "http://localhost:8081/",
+    // publicPath: "http://localhost:8081/",
+    // publicPath: "http://localhost:8080/",
     path:path.resolve("docs/")
   },
 
@@ -67,6 +70,15 @@ module.exports = (_, argv) => ({
     new HtmlWebPackPlugin({
       template: "./public/index.html",
     }),
+    // new CopyPlugin({
+    //     patterns:[
+    //       {
+    //         from:path.resolve(__dirname, "../src/assets/*"),
+    //         to:path.resolve(__dirname, "../docs"),
+    //         context:"src"
+    //       }
+    //     ]
+    // }),
     new Dotenv()
   ],
 });
