@@ -2,6 +2,7 @@ import { AppBar, Box, Container, Toolbar, Typography } from "@mui/material";
 import React from "react";
 import IMG from "../../assets/lista_1.png";
 import IMGDOS from "../../assets/lista_2.png";
+import IMGTRES from "../../assets/portada.png";
 import LOGO from "../../assets/logo.png";
 
 const ProductosCatalogo = () => {
@@ -43,6 +44,13 @@ const ProductosCatalogo = () => {
         </Container>
       </AppBar>
       <Container maxWidth="lg">
+        <img
+          src={IMGTRES}
+          style={{
+            width: "100%",
+            margin: "10px 0px",
+          }}
+        />
         <img
           src={IMG}
           style={{
