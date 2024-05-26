@@ -1,24 +1,70 @@
-import React from "react";
-import ReactDOM from "react-dom/client";
-import "./index.css";
-import { theme } from "./styles/Tema";
-import { CssBaseline, ThemeProvider } from "@mui/material";
-import ProductosCatalogo from "./pages/ProductosCatalogo/ProductosCatalogo";
+import React, { useEffect } from "react";
+import { RoutesList } from "./utils/routes";
+import { CssBaseline } from "@mui/material";
+import { getUserLogin, selectUser } from "./store/slices/loginSlice";
+import { useAppDispatch, useAppSelector } from "./store/hooks";
+import TemaPrincipal from "./styles/TemaPrincipal";
+import FondoDegradado from "./components/layouts/FondoDegradado";
+import ProtectedRoutes from "./components/Protected/ProtectedRoutes";
+import "./styles/globals.css";
+import {
+  Navigate,
+  Route,
+  BrowserRouter as Router,
+  Routes,
+} from "react-router-dom";
 
 const App = () => {
+  const stUser = useAppSelector(selectUser);
+  const dispatch = useAppDispatch();
+
+  const userLogin = localStorage.getItem("sesion");
+  const parseUser = userLogin ? JSON.parse(userLogin) : null;
+
+  useEffect(() => {
+    dispatch(getUserLogin({ user: parseUser }));
+  }, []);
+
   return (
-    <div>
-      <div className="gradient"></div>
-      <ThemeProvider theme={theme}>
-        <CssBaseline />
-        <ProductosCatalogo />
-      </ThemeProvider>
-    </div>
+    <TemaPrincipal>
+      <CssBaseline />
+      <FondoDegradado />
+      <Router>
+        <Routes>
+          {RoutesList.routesItems.map((itemRoute) => {
+            return (
+              <Route
+                key={itemRoute.path}
+                path={itemRoute.path}
+                element={
+                  <ProtectedRoutes
+                    user={stUser || parseUser}
+                    isProtect={itemRoute.protected}
+                  >
+                    {itemRoute.redirect === "" ? (
+                      <itemRoute.element />
+                    ) : (
+                      <Navigate to={itemRoute.redirect} />
+                    )}
+                  </ProtectedRoutes>
+                }
+              >
+                {itemRoute.nested.map((nestedRoutes) => {
+                  return (
+                    <Route
+                      key={nestedRoutes.path}
+                      path={nestedRoutes.path}
+                      element={<nestedRoutes.element />}
+                    />
+                  );
+                })}
+              </Route>
+            );
+          })}
+        </Routes>
+      </Router>
+    </TemaPrincipal>
   );
 };
-const rootElement = document.getElementById("app");
-if (!rootElement) throw new Error("Failed to find the root element");
 
-const root = ReactDOM.createRoot(rootElement);
-
-root.render(<App />);
+export default App;
