@@ -1,0 +1,84 @@
+{
+  "name": "bot",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/bot/src",
+  "projectType": "application",
+  "tags": [],
+  "targets": {
+    "build": {
+      "executor": "@nx/webpack:webpack",
+      "outputs": ["{options.outputPath}"],
+      "defaultConfiguration": "production",
+      "options": {
+        "compiler": "babel",
+        "outputPath": "dist/apps/bot",
+        "index": "apps/bot/src/index.html",
+        "baseHref": "/",
+        "main": "apps/bot/src/main.ts",
+        "tsConfig": "apps/bot/tsconfig.app.json",
+        "assets": ["apps/bot/src/favicon.ico", "apps/bot/src/assets"],
+        "styles": ["apps/bot/src/styles.css"],
+        "scripts": [],
+        "webpackConfig": "apps/bot/webpack.config.ts"
+      },
+      "configurations": {
+        "development": {
+          "extractLicenses": false,
+          "optimization": false,
+          "sourceMap": true,
+          "vendorChunk": true
+        },
+        "production": {
+          "fileReplacements": [
+            {
+              "replace": "apps/bot/src/environments/environment.ts",
+              "with": "apps/bot/src/environments/environment.prod.ts"
+            }
+          ],
+          "optimization": true,
+          "outputHashing": "all",
+          "sourceMap": false,
+          "namedChunks": false,
+          "extractLicenses": true,
+          "vendorChunk": false,
+          "webpackConfig": "apps/bot/webpack.config.prod.ts"
+        }
+      }
+    },
+    "serve": {
+      "executor": "@nx/react:module-federation-dev-server",
+      "defaultConfiguration": "development",
+      "options": {
+        "buildTarget": "bot:build",
+        "hmr": true,
+        "port": 4202
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "bot:build:development"
+        },
+        "production": {
+          "buildTarget": "bot:build:production",
+          "hmr": false
+        }
+      }
+    },
+    "serve-static": {
+      "executor": "@nx/web:file-server",
+      "defaultConfiguration": "production",
+      "options": {
+        "buildTarget": "bot:build",
+        "watch": false,
+        "port": 4202
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "bot:build:development"
+        },
+        "production": {
+          "buildTarget": "bot:build:production"
+        }
+      }
+    }
+  }
+}
